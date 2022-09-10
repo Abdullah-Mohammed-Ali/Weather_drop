@@ -1,6 +1,8 @@
 # drop_weather
 
 A new Flutter project.
+For Algoriza Task 2
+
 
 ## Getting Started
 
