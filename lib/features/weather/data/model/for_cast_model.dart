@@ -6,23 +6,18 @@ class ForecastingModel extends ForecastingEntity {
   ForecastingModel.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
     temp = json['temp'];
-    feelsLike = json['feels_like'];
+    feelsLike = double.parse(json['feels_like'].toString());
     pressure = json['pressure'];
     humidity = json['humidity'];
-    dewPoint = json['dew_point'];
-    uvi = json['uvi'];
     clouds = json['clouds'];
     visibility = json['visibility'];
-    windSpeed = json['wind_speed'];
-    windDeg = json['wind_deg'];
-    windGust = json['wind_gust'];
+    windSpeed = double.parse(json['wind_speed'].toString());
     if (json['weather'] != null) {
       weather = <Weather>[];
       json['weather'].forEach((v) {
         weather!.add(Weather.fromJson(v));
       });
     }
-    pop = json['pop'];
   }
 
   Map<String, dynamic> toJson() {
@@ -32,17 +27,15 @@ class ForecastingModel extends ForecastingEntity {
     data['feels_like'] = feelsLike;
     data['pressure'] = pressure;
     data['humidity'] = humidity;
-    data['dew_point'] = dewPoint;
-    data['uvi'] = uvi;
+
     data['clouds'] = clouds;
     data['visibility'] = visibility;
     data['wind_speed'] = windSpeed;
-    data['wind_deg'] = windDeg;
+
     data['wind_gust'] = windGust;
     if (weather != null) {
       data['weather'] = weather!.map((v) => v.toJson()).toList();
     }
-    data['pop'] = pop;
     return data;
   }
 }

@@ -6,6 +6,7 @@ import 'package:drop_weather/features/weather/domain/entities/weatherInfoEntity.
 import '../../../../core/utils_classes/coord.dart';
 import '../../domain/entities/for_cast_entity.dart';
 import '../../domain/repo/repo_contract.dart';
+import '../model/daily_fore_cast_model.dart';
 
 class RepoWeatherImpl implements RepoWeather<WeatherInfoEntity> {
   final DataSource _dataSource;
@@ -24,12 +25,13 @@ class RepoWeatherImpl implements RepoWeather<WeatherInfoEntity> {
   }
 
   @override
-  Future<Either<Failures, List<ForecastingEntity>?>?> getWeatherForCastDaily(
+  Future<Either<Failures, List<DailyForeCastModel>?>?> getWeatherForCastDaily(
       Coord coord) async {
     try {
       var result = await _dataSource.getDailyForecastByCoord(coord);
       return Right(result);
     } catch (e) {
+      rethrow;
       return Left(HttpFailures(e.toString()));
     }
   }
@@ -41,6 +43,7 @@ class RepoWeatherImpl implements RepoWeather<WeatherInfoEntity> {
       var result = await _dataSource.getHourlyForecastByCoord(coord);
       return Right(result);
     } catch (e) {
+      rethrow;
       return Left(HttpFailures(e.toString()));
     }
   }
